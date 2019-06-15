@@ -1,0 +1,19 @@
+#Ejemplo para añadir un usuario
+# IMPORTANTE!! - modificar el nombre y los atributos gidnumber y uidnumber
+
+dn: uid=user,ou=users,dc=lucius-tool,dc=com
+cn: user
+gecos: user
+gidnumber: 101
+homedirectory: /home/vidal
+loginshell: /bin/bash
+objectclass: top
+objectclass: account
+objectclass: posixAccount
+objectclass: shadowAccount
+shadowlastchange: 0
+shadowmax: 0
+shadowwarning: 0
+uid: user
+uidnumber: 16860
+userpassword: {SHA}5431a5ce02fa3c14c98aa025fc8454045c65b65d
