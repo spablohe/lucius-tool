@@ -42,10 +42,10 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
                   </div>
-					<div class="alert alert-primary" role="alert" th:if="${param.logout}">
+					<div class="alert alert-primary center-text" role="alert" th:if="${param.logout}">
 					    Has sido desconectado.
 					</div>
-					<div class="alert alert-danger" role="alert" th:if="${param.error}">
+					<div class="alert alert-danger center-text" role="alert" th:if="${param.error}">
 					    Usuario y/o contraseña incorrectos.
 					</div>
                   <form class="user" th:action="@{/login}" method="post">
