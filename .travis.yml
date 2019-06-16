@@ -1,9 +1,11 @@
 language: java
+jdk: oraclejdk8
+install: true
 script: ./mvnw clean install
 deploy:
   provider: heroku
-  api_key: 36ca5c53-cbd9-4238-852d-3dbb245ed7e3
-    secure: KEY
+  api_key: 
+    secure: 36ca5c53-cbd9-4238-852d-3dbb245ed7e3
   app: lucius-tool
   on:
     repo: spablohe/lucius-tool
