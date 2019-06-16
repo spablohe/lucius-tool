@@ -7,8 +7,8 @@ addons:
     token:
       secure: f887959694bbbe07ab25fd5ecd4900ad0875aa8d
 script:
-  ./mvnw clean install
-  sonar-scanner
+  - sonar-scanner
+  - ./mvnw clean install
 deploy:
   provider: heroku
   api_key: 
