@@ -7,7 +7,7 @@ addons:
     token:
       secure: f887959694bbbe07ab25fd5ecd4900ad0875aa8d
 script:
-  - sonar-scanner
+  - mvn sonar:sonar -Dsonar.projectKey=spablohe_lucius-tool -Dsonar.organization=spablohe-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=f887959694bbbe07ab25fd5ecd4900ad0875aa8d
   - ./mvnw clean install
 deploy:
   provider: heroku
