@@ -58,7 +58,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/clientes">
           <i class="fas fa-fw fa-folder"></i>
           <span>Clientes</span>
@@ -66,7 +66,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="/contratos">
           <i class="fas fa-fw fa-folder"></i>
           <span>Contratos</span>
@@ -247,13 +247,13 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Clientes</h1>
-          <p class="mb-4">Esta es toda la informaci&oacute;n de los clientes registrados en el sistema.</p>
+          <h1 class="h3 mb-2 text-gray-800">Contratos</h1>
+          <p class="mb-4">Esta es toda la información registrada en el sistema de los contratos.</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Clientes</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Contratos</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -261,25 +261,34 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>FECHA ALTA</th>
-                      <th>NOMBRE</th>
-                      <th>ACCIONES</th>
+                      <th>ID CLIENTE</th>
+                      <th>FECHA LLEGADA</th>
+                      <th>FECHA SALIDA</th>
+                      <th>PIEZAS</th>
+                      <th>COSTE/PIEZA</th>
+                      <th>ESTADO</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                       <th>ID</th>
-                      <th>FECHA ALTA</th>
-                      <th>NOMBRE</th>
-                      <th>ACCIONES</th>
+                      <th>ID CLIENTE</th>
+                      <th>FECHA LLEGADA</th>
+                      <th>FECHA SALIDA</th>
+                      <th>PIEZAS</th>
+                      <th>COSTE/PIEZA</th>
+                      <th>ESTADO</th>
                     </tr>
                   </tfoot>
                   <tbody id="bodyTable">
-                    <tr th:each="cliente: ${clientes}">
-					    <td th:text="${cliente.id}" />
-					    <td th:text="${cliente.fecha_alta}" />
-					    <td th:text="Nombre" />
-					    <td th:text="Acciones" />
+                    <tr th:each="contrato: ${contratos}">
+					    <td th:text="${contrato.id}" />
+					    <td th:text="${contrato.id_cliente}" />
+					    <td th:text="${contrato.fecha_in}" />
+					    <td th:text="${contrato.fecha_out}" />
+					    <td th:text="${contrato.piezas}" />
+					    <td th:text="${contrato.cost_pieza}" />
+					    <td th:text="${contrato.estado}" />
 					</tr>
                   </tbody>
                 </table>

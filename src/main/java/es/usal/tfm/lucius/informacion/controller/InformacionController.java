@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.usal.tfm.lucius.grafica.dto.ClienteDto;
+import es.usal.tfm.lucius.grafica.dto.ContratoDto;
 import es.usal.tfm.lucius.grafica.service.IClienteService;
 import es.usal.tfm.lucius.grafica.service.IContratoService;
 
@@ -23,11 +24,20 @@ public class InformacionController {
 	IContratoService contratoService;
 	
 	@RequestMapping(value="/clientes", method=RequestMethod.GET)
-	public ModelAndView recInfoClientes(Model model) {
+	public ModelAndView viewClientes(Model model) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("clientes");
 		List<ClienteDto> clientes = clienteService.getAllClientes();
 		model.addAttribute("clientes", clientes);
+		return mav;
+	}
+	
+	@RequestMapping(value="/contratos", method=RequestMethod.GET)
+	public ModelAndView viewContratos(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("contratos");
+		List<ContratoDto> contratos = contratoService.getAllContratos();
+		model.addAttribute("contratos", contratos);
 		return mav;
 	}
 
