@@ -27,15 +27,14 @@ public class HomeController {
 	@ResponseBody
     public String recData() {
 		List<ConfigDto> config = (List<ConfigDto>) configUtils.findAll();
-		EnvioJsonDto<ConfigDto> ejd = new EnvioJsonDto<ConfigDto>("data", config);
+		EnvioJsonDto<ConfigDto> ejd = new EnvioJsonDto<ConfigDto>("config", config);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(ejd);
     }
 	
 	@GetMapping("/recData/{id}")
     public String recDataId(@PathVariable("id") String id) {
-		String value = configUtils.findById(id);
-		return value;
+		return configUtils.findById(id);
     }
 
 }
