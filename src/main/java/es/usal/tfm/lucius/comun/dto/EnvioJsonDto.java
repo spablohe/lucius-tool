@@ -9,6 +9,8 @@ public class EnvioJsonDto<T> implements Serializable {
 
 	private String tipo;
 	
+	private Object obj;
+	
 	private List<T> lista;
 
 	public EnvioJsonDto() {
@@ -25,6 +27,19 @@ public class EnvioJsonDto<T> implements Serializable {
 		this.lista = lista;
 	}
 
+	public EnvioJsonDto(String tipo, Object obj) {
+		super();
+		this.tipo = tipo;
+		this.obj = obj;
+	}
+
+	public EnvioJsonDto(String tipo, Object obj, List<T> lista) {
+		super();
+		this.tipo = tipo;
+		this.obj = obj;
+		this.lista = lista;
+	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
@@ -35,6 +50,14 @@ public class EnvioJsonDto<T> implements Serializable {
 
 	public void setLista(List<T> lista) {
 		this.lista = lista;
+	}
+
+	public Object getObj() {
+		return obj;
+	}
+
+	public void setObj(Object obj) {
+		this.obj = obj;
 	}
 
 }
