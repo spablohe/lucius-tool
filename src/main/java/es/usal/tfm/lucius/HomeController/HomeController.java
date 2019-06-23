@@ -121,5 +121,20 @@ public class HomeController {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(ejd);
 	}
+	
+	/**
+	 * Metodo que recupera toda la informacion asociada a un cliente junto a los contratos
+	 * @param id
+	 * @return info cliente y contratos asociados
+	 */
+	@GetMapping(value="/getInfoCliente/{id}", produces=MediaType.APPLICATION_JSON)
+	@ResponseBody
+	public String recInfoClientes(@PathVariable("id") String id) {
+		ClienteDto cliente = clienteService.getClienteById(id);
+		List<ContratoDto> contratos = contratoService.getContratosByClienteId(id);
+		EnvioJsonDto<ContratoDto> ejd = new EnvioJsonDto<ContratoDto>("info-cliente", cliente, contratos);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(ejd);
+	}
 
 }

@@ -2,20 +2,14 @@ package es.usal.tfm.lucius.informacion.controller;
 
 import java.util.List;
 
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import es.usal.tfm.lucius.comun.dto.EnvioJsonDto;
 import es.usal.tfm.lucius.grafica.dto.ClienteDto;
-import es.usal.tfm.lucius.grafica.dto.ContratoDto;
 import es.usal.tfm.lucius.grafica.service.IClienteService;
 import es.usal.tfm.lucius.grafica.service.IContratoService;
 
@@ -28,14 +22,13 @@ public class InformacionController {
 	@Autowired
 	IContratoService contratoService;
 	
-	@GetMapping(value="/getInfoCliente/{id}", produces=MediaType.APPLICATION_JSON)
-	@ResponseBody
-	public String recInfoClientes(@PathVariable("id") String id) {
-		ClienteDto cliente = clienteService.getClienteById(id);
-		List<ContratoDto> contratos = contratoService.getContratosByClienteId(id);
-		EnvioJsonDto<ContratoDto> ejd = new EnvioJsonDto<ContratoDto>("info-cliente", cliente, contratos);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		return gson.toJson(ejd);
+	@RequestMapping(value="/clientes", method=RequestMethod.GET)
+	public ModelAndView recInfoClientes(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("clientes");
+		List<ClienteDto> clientes = clienteService.getAllClientes();
+		model.addAttribute("clientes", clientes);
+		return mav;
 	}
 
 }
