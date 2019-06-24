@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Clientes</title>
+  <title>Gastos Totales</title>
 
   <!-- Custom fonts for this template-->
   <link th:href="@{/public/vendor/fontawesome-free/css/all.min.css}" href="/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,7 +66,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/contratos">
           <i class="fas fa-fw fa-folder"></i>
           <span>Contratos</span>
@@ -82,7 +82,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="/stats/total">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Ingresos/Gastos</span>
@@ -247,54 +247,8 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Contratos</h1>
-          <p class="mb-4">Esta es toda la información registrada en el sistema de los contratos.</p>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Contratos</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>ID CLIENTE</th>
-                      <th>FECHA LLEGADA</th>
-                      <th>FECHA SALIDA</th>
-                      <th>PIEZAS</th>
-                      <th>COSTE/PIEZA</th>
-                      <th>ESTADO</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>ID CLIENTE</th>
-                      <th>FECHA LLEGADA</th>
-                      <th>FECHA SALIDA</th>
-                      <th>PIEZAS</th>
-                      <th>COSTE/PIEZA</th>
-                      <th>ESTADO</th>
-                    </tr>
-                  </tfoot>
-                  <tbody id="bodyTable">
-                    <tr th:each="contrato: ${contratos}">
-					    <td th:text="${contrato.id}" />
-					    <td th:text="${contrato.id_cliente}" />
-					    <td th:text="${contrato.fecha_in}" />
-					    <td th:text="${contrato.fecha_out}" />
-					    <td th:text="${contrato.piezas}" />
-					    <td th:text="${contrato.cost_pieza}" />
-					    <td th:text="${contrato.estado}" />
-					</tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          <h1 class="h3 mb-4 text-gray-800">Gastos Totales</h1>
+          <canvas id="myChart" width="200" height="200"></canvas>
 
         </div>
         <!-- /.container-fluid -->
@@ -354,15 +308,42 @@
   <!-- Custom scripts for all pages-->
   <script th:src="@{/public/js/sb-admin-2.min.js}" src="/public/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script th:src="@{/public/vendor/datatables/jquery.dataTables.min.js}" src="/public/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script th:src="@{/public/vendor/datatables/dataTables.bootstrap4.min.js}" src="/public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script th:src="@{/public/js/demo/datatables-demo.js}" src="/public/js/demo/datatables-demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
-  <!-- Script propio para generar tabla -->
-  <script th:src="@{/js/clientes/clientes.js}" src="/js/clientes/clientes.js"></script>
+  <script>
+
+
+    $.ajax({
+      url: 'http://localhost:8080/getStatsTotales',
+      success: function(data) {
+        var ctx= document.getElementById("myChart").getContext("2d");
+        var myChart= new Chart(ctx,{
+            type:"line",
+            data:{
+                labels:data.tags,
+                datasets:[{
+                        label:'Cantidad (€)',
+                        data:data.values,
+                        backgroundColor:'rgb(66, 134, 244,0.5)'
+                }]
+            },
+            options:{
+                scales:{
+                    yAxes:[{
+                            ticks:{
+                                beginAtZero:true
+                            }
+                    }]
+                }
+            }
+        });
+        },
+      error: function() {
+            console.log("No se ha podido obtener la informacion");
+        }
+    });
+  </script>
 
 </body>
 
