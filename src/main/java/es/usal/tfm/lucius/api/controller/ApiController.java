@@ -1,6 +1,8 @@
-package es.usal.tfm.lucius.HomeController;
+package es.usal.tfm.lucius.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
@@ -18,11 +20,13 @@ import es.usal.tfm.lucius.comun.dto.EnvioJsonDto;
 import es.usal.tfm.lucius.comun.service.IConfigUtils;
 import es.usal.tfm.lucius.grafica.dto.ClienteDto;
 import es.usal.tfm.lucius.grafica.dto.ContratoDto;
+import es.usal.tfm.lucius.grafica.dto.GraficaDto;
 import es.usal.tfm.lucius.grafica.service.IClienteService;
 import es.usal.tfm.lucius.grafica.service.IContratoService;
+import es.usal.tfm.lucius.informacion.service.IInformacionService;
 
 @RestController
-public class HomeController {
+public class ApiController {
 	
 	@Autowired
 	IConfigUtils configUtils;
@@ -32,6 +36,9 @@ public class HomeController {
 	
 	@Autowired
 	IContratoService contratoService;
+	
+	@Autowired
+	IInformacionService infoService;
 	
 	/**
 	 * API REST SECCION COMUNES
@@ -135,6 +142,22 @@ public class HomeController {
 		EnvioJsonDto<ContratoDto> ejd = new EnvioJsonDto<ContratoDto>("info-cliente", cliente, contratos);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(ejd);
+	}
+	
+	/**
+	 * Devuelve un JSON con la informacion por año-mes de los gastos
+	 * @return JSON con la informacion asociada
+	 */
+	@GetMapping(value="/getStatsTotales", produces=MediaType.APPLICATION_JSON)
+	@ResponseBody
+	public String getStatsTotales() {
+		Map<String,Double> gastos = infoService.getStatsTotales();
+		List<String> tags = new ArrayList<String>();
+		List<Double> values = new ArrayList<Double>();
+		gastos.forEach((k,v) -> {tags.add(k);values.add(v);});
+		GraficaDto<String, Double> graf = new GraficaDto<String, Double>(tags,values);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(graf);
 	}
 
 }
