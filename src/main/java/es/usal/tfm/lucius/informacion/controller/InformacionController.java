@@ -40,5 +40,32 @@ public class InformacionController {
 		model.addAttribute("contratos", contratos);
 		return mav;
 	}
+	
+	@RequestMapping(value="/stats/total", method=RequestMethod.GET)
+	public ModelAndView viewStatsTotales(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("stats_totales");
+		List<ContratoDto> contratos = contratoService.getAllContratos();
+		model.addAttribute("contratos", contratos);
+		return mav;
+	}
+	
+	@RequestMapping(value="/stats/costepieza", method=RequestMethod.GET)
+	public ModelAndView viewStatsCostePorPieza(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("contratos");
+		List<ContratoDto> contratos = contratoService.getAllContratos();
+		model.addAttribute("contratos", contratos);
+		return mav;
+	}
+	
+	@RequestMapping(value="/stats/clientes", method=RequestMethod.GET)
+	public ModelAndView viewStatsClientes(Model model) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("contratos");
+		List<ContratoDto> contratos = contratoService.getAllContratos();
+		model.addAttribute("contratos", contratos);
+		return mav;
+	}
 
 }
