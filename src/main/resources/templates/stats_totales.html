@@ -315,7 +315,7 @@
 
 
     $.ajax({
-      url: 'http://localhost:8080/getStatsTotales',
+      url: 'http://'+ window.location.href.split('/')[2] + '/getStatsTotales',
       success: function(data) {
         var ctx= document.getElementById("myChart").getContext("2d");
         var myChart= new Chart(ctx,{
