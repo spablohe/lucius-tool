@@ -6,6 +6,8 @@ public interface IInformacionService {
 	
 	Map<String,Double> getStatsTotales();
 	
+	Map<String,Map<String,Double>> getStatsTotalesDetalle();
+	
 	Map<String,Double> getStatsCostePorPieza();
 	
 	Map<String,Double> getStatsClientes();

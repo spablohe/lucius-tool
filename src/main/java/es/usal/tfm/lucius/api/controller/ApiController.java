@@ -159,5 +159,35 @@ public class ApiController {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(graf);
 	}
+	
+	/**
+	 * Devuelve un JSON con la informacion por año-mes de los gastos desglosados
+	 * @return JSON con la informacion asociada
+	 */
+	@GetMapping(value="/getStatsTotalesDetalle", produces=MediaType.APPLICATION_JSON)
+	@ResponseBody
+	public String getStatsTotalesDetalle() {
+		Map<String,Map<String,Double>> gastos = infoService.getStatsTotalesDetalle();
+		List<String> tags = new ArrayList<String>();
+		List<List<Double>> values = new ArrayList<List<Double>>();
+		List<Double> luz = new ArrayList<Double>();
+		List<Double> subctr = new ArrayList<Double>();
+		List<Double> nominas = new ArrayList<Double>();
+		List<Double> agua = new ArrayList<Double>();
+		gastos.forEach((k,v) -> {
+			tags.add(k);
+			luz.add(gastos.get(k).get("luz"));
+			subctr.add(gastos.get(k).get("subcontratados"));
+			nominas.add(gastos.get(k).get("nominas"));
+			agua.add(gastos.get(k).get("agua"));
+			});
+		values.add(luz);
+		values.add(subctr);
+		values.add(nominas);
+		values.add(agua);
+		GraficaDto<String, List<Double>> graf = new GraficaDto<String, List<Double>>(tags,values);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(graf);
+	}
 
 }

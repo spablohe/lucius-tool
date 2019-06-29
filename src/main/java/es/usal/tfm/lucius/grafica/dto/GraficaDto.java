@@ -2,6 +2,7 @@ package es.usal.tfm.lucius.grafica.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class GraficaDto<T,S> implements Serializable {
 
@@ -10,6 +11,8 @@ public class GraficaDto<T,S> implements Serializable {
 	List<T> tags;
 	
 	List<S> values;
+	
+	Map<T,S> mValues;
 
 	public GraficaDto() {
 		super();
@@ -19,6 +22,12 @@ public class GraficaDto<T,S> implements Serializable {
 		super();
 		this.tags = tags;
 		this.values = values;
+	}
+
+	public GraficaDto(List<T> tags, Map<T, S> mValues) {
+		super();
+		this.tags = tags;
+		this.mValues = mValues;
 	}
 
 	public List<T> getTags() {
@@ -35,6 +44,14 @@ public class GraficaDto<T,S> implements Serializable {
 
 	public void setValues(List<S> values) {
 		this.values = values;
+	}
+
+	public Map<T, S> getmValues() {
+		return mValues;
+	}
+
+	public void setmValues(Map<T, S> mValues) {
+		this.mValues = mValues;
 	}
 
 }

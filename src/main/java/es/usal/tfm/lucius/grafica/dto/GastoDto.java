@@ -27,6 +27,9 @@ public class GastoDto implements Serializable {
 	@Column(name="importe")
 	private double importe;
 	
+	@Column(name="tipo")
+	private String tipo;
+	
 	public GastoDto() {
 		super();
 	}
@@ -61,6 +64,14 @@ public class GastoDto implements Serializable {
 
 	public void setImporte(double importe) {
 		this.importe = importe;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

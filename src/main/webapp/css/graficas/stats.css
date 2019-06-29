@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+.grafica-container {
+	position: relative;
+    height: 30px;
+    width: 37vw;
+}
+
+.grafica-container-2 {
+	position: fixed;
+    height: 30px;
+    width: 37vw;
+    margin-left: 40%;
+}
