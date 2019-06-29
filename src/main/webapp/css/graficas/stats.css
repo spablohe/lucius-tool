@@ -20,6 +20,10 @@
 	margin: 0 20%;
 }
 
+.ajuste-input-buscar {
+	width: 90% !important;
+}
+
 .fix-search-bar {
 	background-color: white !important;
 }
@@ -48,6 +52,7 @@ input[type=submit] {
   border-bottom: none;
   border-top: none;
   z-index: 99;
+  width: 90%;
   /*position the autocomplete items to be the same width as the container:*/
   top: 100%;
   left: 0;
