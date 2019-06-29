@@ -27,7 +27,11 @@ public class ConfigUtils implements IConfigUtils {
 	@Override
 	public String findById(String id) {
 		Optional<ConfigDto> cdto = repository.findById(id);
-		return cdto.get().getValue();
+		if(cdto.isPresent()) {
+			return cdto.get().getValue();
+		} else {
+			return null;
+		}
 	}
 
 }
