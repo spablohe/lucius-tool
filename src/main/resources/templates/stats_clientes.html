@@ -277,16 +277,18 @@
 		    </form>
           </div>
           <div class="row">
-	          <div class="col-lg-5 col-lg-offset-1" id="informacion">
-		          	<canvas id="myChart" width="200" height="200"></canvas>
-	          </div>
-	          <div class="margen-left col-lg-offset-1 col-lg-5" id="informacion2">
-		          	<canvas id="myChart2" width="200" height="200"></canvas>
+	          <div class="cont-grafica" id="informacion">
+		          	<canvas id="myChart" width="500" height="250"></canvas>
 	          </div>
           </div>
           <div class="row">
-	          <div class="col-lg-12" id="informacion3">
-		          	<canvas id="myChart3" width=1200 height="500"></canvas>
+	          <div class="cont-grafica" id="informacion2">
+		          	<canvas id="myChart2" width="500" height="250"></canvas>
+	          </div>
+          </div>
+          <div class="row">
+	          <div class="cont-grafica" id="informacion3">
+		          	<canvas id="myChart3" width="500" height="250"></canvas>
 	          </div>
           </div>
         </div>
@@ -485,7 +487,7 @@ function recuperarDatosClienteBuscado(idCliente) {
               data:{
                   labels:data.tags,
                   datasets:[{
-                          label:'Cantidad (€)',
+                          label:'Coste por Pieza (€)',
                           data:data.values,
                           backgroundColor:'rgb(66, 134, 244,0.5)'
                   }]
@@ -493,12 +495,12 @@ function recuperarDatosClienteBuscado(idCliente) {
               options:{
   				title: {
   					display: true,
-  					text: 'Gastos de ' + idCliente
+  					text: 'Costes por Pieza de ' + idCliente
   				},
                   scales:{
                       yAxes:[{
                               ticks:{
-                                  beginAtZero:true
+                                  beginAtZero:false
                               }
                       }]
                   }

@@ -24,6 +24,12 @@
 	margin-left: 10%;
 }
 
+.cont-grafica {
+	position: relative;
+    height: 55rem;
+    width: 100%;
+}
+
 .alto-limitadp {
 	max-height: 50%;
 }
