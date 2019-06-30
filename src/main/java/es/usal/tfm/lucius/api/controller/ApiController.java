@@ -75,11 +75,28 @@ public class ApiController {
 	 * Metodo para recuperar todos los clientes del sistema
 	 * @return json con todos los clientes
 	 */
+	@GetMapping(value="/getAllClientesDetalle", produces=MediaType.APPLICATION_JSON)
+	@ResponseBody
+	public String recAllClientesDetalle() {
+		List<ClienteDto> clientes = clienteService.getAllClientes();
+		EnvioJsonDto<ClienteDto> ejd = new EnvioJsonDto<ClienteDto>("clientes", clientes);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(ejd);
+	}
+	
+	/**
+	 * Metodo para recuperar todos los clientes del sistema
+	 * @return json con todos los clientes
+	 */
 	@GetMapping(value="/getAllClientes", produces=MediaType.APPLICATION_JSON)
 	@ResponseBody
 	public String recAllClientes() {
 		List<ClienteDto> clientes = clienteService.getAllClientes();
-		EnvioJsonDto<ClienteDto> ejd = new EnvioJsonDto<ClienteDto>("clientes", clientes);
+		List<String> nombres = new ArrayList<String>();
+		for(ClienteDto c : clientes) {
+			nombres.add(c.getId());
+		}
+		EnvioJsonDto<ClienteDto> ejd = new EnvioJsonDto<ClienteDto>("clientes", nombres);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(ejd);
 	}
@@ -156,36 +173,6 @@ public class ApiController {
 		List<Double> values = new ArrayList<Double>();
 		gastos.forEach((k,v) -> {tags.add(k);values.add(v);});
 		GraficaDto<String, Double> graf = new GraficaDto<String, Double>(tags,values);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		return gson.toJson(graf);
-	}
-	
-	/**
-	 * Devuelve un JSON con la informacion por año-mes de los gastos desglosados
-	 * @return JSON con la informacion asociada
-	 */
-	@GetMapping(value="/getStatsTotalesDetalle", produces=MediaType.APPLICATION_JSON)
-	@ResponseBody
-	public String getStatsTotalesDetalle() {
-		Map<String,Map<String,Double>> gastos = infoService.getStatsTotalesDetalle();
-		List<String> tags = new ArrayList<String>();
-		List<List<Double>> values = new ArrayList<List<Double>>();
-		List<Double> luz = new ArrayList<Double>();
-		List<Double> subctr = new ArrayList<Double>();
-		List<Double> nominas = new ArrayList<Double>();
-		List<Double> agua = new ArrayList<Double>();
-		gastos.forEach((k,v) -> {
-			tags.add(k);
-			luz.add(gastos.get(k).get("luz"));
-			subctr.add(gastos.get(k).get("subcontratados"));
-			nominas.add(gastos.get(k).get("nominas"));
-			agua.add(gastos.get(k).get("agua"));
-			});
-		values.add(luz);
-		values.add(subctr);
-		values.add(nominas);
-		values.add(agua);
-		GraficaDto<String, List<Double>> graf = new GraficaDto<String, List<Double>>(tags,values);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		return gson.toJson(graf);
 	}

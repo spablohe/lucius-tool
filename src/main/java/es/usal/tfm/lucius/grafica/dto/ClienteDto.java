@@ -20,6 +20,9 @@ public class ClienteDto implements Serializable {
 	
 	@Column(name="fecha_alta")
 	private Date fecha_alta;
+	
+	@Column(name="nombre")
+	private String nombre;
 
 	public ClienteDto() {
 		super();
@@ -39,6 +42,14 @@ public class ClienteDto implements Serializable {
 
 	public void setFecha_alta(Date fecha_alta) {
 		this.fecha_alta = fecha_alta;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

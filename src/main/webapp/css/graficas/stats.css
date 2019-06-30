@@ -20,6 +20,14 @@
 	margin: 0 20%;
 }
 
+.margen-left {
+	margin-left: 10%;
+}
+
+.alto-limitadp {
+	max-height: 50%;
+}
+
 .ajuste-input-buscar {
 	width: 90% !important;
 }
