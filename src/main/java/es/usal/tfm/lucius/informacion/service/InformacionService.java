@@ -1,6 +1,8 @@
 package es.usal.tfm.lucius.informacion.service;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,9 +11,10 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.usal.tfm.lucius.grafica.dto.ClienteDto;
 import es.usal.tfm.lucius.grafica.dto.ContratoDto;
+import es.usal.tfm.lucius.grafica.dto.GSTGeneralDto;
 import es.usal.tfm.lucius.grafica.dto.GastoDto;
+import es.usal.tfm.lucius.grafica.repository.GSTGeneralRepository;
 import es.usal.tfm.lucius.grafica.repository.GastosRepository;
 import es.usal.tfm.lucius.grafica.service.IClienteService;
 import es.usal.tfm.lucius.grafica.service.IContratoService;
@@ -27,6 +30,9 @@ public class InformacionService implements IInformacionService {
 	
 	@Autowired
 	GastosRepository grepository;
+	
+	@Autowired
+	GSTGeneralRepository genrepository;
 
 	public InformacionService() {
 		super();
@@ -91,13 +97,33 @@ public class InformacionService implements IInformacionService {
 
 	@Override
 	public Map<String, Double> getStatsClienteBalance(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		DateFormat formato = new SimpleDateFormat("YYYY-MM");
+		Map<String, Double> cpPmensual = new TreeMap<>();
+		Map<String, Double> balance = new TreeMap<>();
+		List<String> fechas = new ArrayList<>();
+		List<GSTGeneralDto> gstGeneral = (List<GSTGeneralDto>) genrepository.findAll();
+		List<ContratoDto> contratos = contratoService.getContratosByClienteId(id);
+		for(GSTGeneralDto g : gstGeneral) {
+			balance.put(g.getMes(), g.getGastotal()/g.getCapreal());
+			fechas.add(g.getMes());
+		}
+		for(ContratoDto c : contratos) {
+			String inicio = String.valueOf(formato.format(c.getFecha_in()));
+			String fin = String.valueOf(formato.format(c.getFecha_out()));
+			int index = fechas.indexOf(inicio);
+			while(!fechas.get(index).equals(fin) && (index<fechas.size())) {
+				cpPmensual.put(fechas.get(index), c.getCost_pieza());
+				index++;
+			}
+		}
+		cpPmensual.forEach((k,v) -> {
+			v = v - balance.get(k);
+			});
+		return cpPmensual;
 	}
 
 	@Override
 	public Map<String, Double> getStatsClienteGF(String id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
