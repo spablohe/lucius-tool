@@ -1,9 +1,11 @@
 package es.usal.tfm.lucius.informacion.service;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -111,14 +113,18 @@ public class InformacionService implements IInformacionService {
 			String inicio = String.valueOf(formato.format(c.getFecha_in()));
 			String fin = String.valueOf(formato.format(c.getFecha_out()));
 			int index = fechas.indexOf(inicio);
-			while(!fechas.get(index).equals(fin) && (index<fechas.size())) {
-				cpPmensual.put(fechas.get(index), c.getCost_pieza());
+			 while(index < fechas.size()) {
+				if(!fechas.get(index).equals(fin)) {
+					cpPmensual.put(fechas.get(index), c.getCost_pieza());
+				}
 				index++;
 			}
 		}
-		cpPmensual.forEach((k,v) -> {
-			v = v - balance.get(k);
-			});
+		Iterator it = cpPmensual.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry ent = (Map.Entry)it.next();
+            ent.setValue((Double)ent.getValue() - balance.get(ent.getKey()));
+        }
 		return cpPmensual;
 	}
 

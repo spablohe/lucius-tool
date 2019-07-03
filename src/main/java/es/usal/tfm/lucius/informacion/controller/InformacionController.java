@@ -25,6 +25,7 @@ import es.usal.tfm.lucius.grafica.dto.GraficaDto;
 import es.usal.tfm.lucius.grafica.service.IClienteService;
 import es.usal.tfm.lucius.grafica.service.IContratoService;
 import es.usal.tfm.lucius.informacion.service.IInformacionService;
+import es.usal.tfm.lucius.informacion.utils.InformacionUtils;
 
 @RestController
 public class InformacionController {
@@ -122,8 +123,15 @@ public class InformacionController {
 	@ResponseBody
 	public String getStatsClienteBalance(@PathVariable("id") String id) {
 		Map<String, Double> datos = infoService.getStatsClienteBalance(id);
+		List<String> tags = new ArrayList<String>();
+		List<Double> values = new ArrayList<Double>();
+		datos.forEach((k,v) -> {
+			tags.add(k);
+			values.add(InformacionUtils.fijarNumero(v, 3));
+		});
+		GraficaDto<String, Double> json = new GraficaDto<String, Double>(tags, values);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		return gson.toJson(datos);
+		return gson.toJson(json);
 	}
 	
 	/**

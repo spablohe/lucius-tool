@@ -506,15 +506,15 @@ function recuperarDatosClienteBuscado(idCliente) {
       });
     
     $.ajax({
-        url: 'http://'+ window.location.href.split('/')[2] + '/getStatsClienteCpP/' + idCliente,
+        url: 'http://'+ window.location.href.split('/')[2] + '/getStatsClienteBalance/' + idCliente,
         success: function(data) {
           var ctx= document.getElementById("myChart2").getContext("2d");
           var myChart= new Chart(ctx,{
-              type:"bar",
+              type:"line",
               data:{
                   labels:data.tags,
                   datasets:[{
-                          label:'Cantidad (€)',
+                          label:'Balance (€/pieza)',
                           data:data.values,
                           backgroundColor:'rgb(66, 134, 244,0.5)'
                   }]
@@ -522,7 +522,7 @@ function recuperarDatosClienteBuscado(idCliente) {
               options:{
   				title: {
   					display: true,
-  					text: 'Gastos de ' + idCliente
+  					text: 'Balance de ' + idCliente
   				},
                   scales:{
                       yAxes:[{
@@ -556,7 +556,7 @@ function recuperarDatosClienteBuscado(idCliente) {
               options:{
   				title: {
   					display: true,
-  					text: 'Gastos de ' + idCliente
+  					text: 'Gastos Financieros aplicados a ' + idCliente
   				},
                   scales:{
                       yAxes:[{
