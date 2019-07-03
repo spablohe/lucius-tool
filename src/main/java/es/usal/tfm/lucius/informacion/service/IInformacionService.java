@@ -8,8 +8,6 @@ public interface IInformacionService {
 	
 	Map<String,Map<String,Double>> getStatsTotalesDetalle();
 	
-	Map<String,Double> getStatsCostePorPieza();
-	
 	Map<String,Double> getStatsClientesCpP(String id);
 	
 	Map<String,Double> getStatsClienteBalance(String id);

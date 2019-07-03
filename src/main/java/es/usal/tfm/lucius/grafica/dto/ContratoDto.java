@@ -31,11 +31,13 @@ public class ContratoDto implements Serializable {
 	private int piezas;
 	
 	@Column(name="cost_pieza")
-	private double cost_pieza;
-	
+	private double cost_pieza;	
 	
 	@Column(name="estado")
 	private String estado;
+	
+	@Column(name="gstfinan")
+	private double gstfinan;
 	
 	public ContratoDto() {
 		super();
@@ -95,6 +97,14 @@ public class ContratoDto implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public double getGstfinan() {
+		return gstfinan;
+	}
+
+	public void setGstfinan(double gstfinan) {
+		this.gstfinan = gstfinan;
 	}
 
 }

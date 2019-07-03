@@ -83,11 +83,6 @@ public class InformacionService implements IInformacionService {
 	}
 
 	@Override
-	public Map<String, Double> getStatsCostePorPieza() {
-		return null;
-	}
-
-	@Override
 	public Map<String, Double> getStatsClientesCpP(String id) {
 		Map<String,Double> datos = new TreeMap<String,Double>();
 		List<ContratoDto> contratos = contratoService.getContratosByClienteId(id);
@@ -130,7 +125,12 @@ public class InformacionService implements IInformacionService {
 
 	@Override
 	public Map<String, Double> getStatsClienteGF(String id) {
-		return null;
+		Map<String,Double> datos = new TreeMap<String,Double>();
+		List<ContratoDto> contratos = contratoService.getContratosByClienteId(id);
+		for (ContratoDto c : contratos) {
+			datos.put(c.getId(), c.getGstfinan());
+		}
+		return datos;
 	}
 
 }

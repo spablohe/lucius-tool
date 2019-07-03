@@ -142,8 +142,15 @@ public class InformacionController {
 	@ResponseBody
 	public String getStatsClienteGF(@PathVariable("id") String id) {
 		Map<String, Double> datos = infoService.getStatsClienteGF(id);
+		List<String> tags = new ArrayList<String>();
+		List<Double> values = new ArrayList<Double>();
+		datos.forEach((k,v) -> {
+			tags.add(k);
+			values.add(v);
+		});
+		GraficaDto<String, Double> json = new GraficaDto<String, Double>(tags, values);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		return gson.toJson(datos);
+		return gson.toJson(json);
 	}
 
 }
