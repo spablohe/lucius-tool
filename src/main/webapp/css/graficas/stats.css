@@ -43,6 +43,10 @@
 	background-color: white !important;
 }
 
+.form-estimador {
+	margin-top: 1.5%;
+}
+
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
