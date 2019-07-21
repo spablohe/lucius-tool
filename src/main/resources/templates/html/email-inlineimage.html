@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Template for HTML email with inline image</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    </head>
+    <body>
+    <div>
+    <p>
+    	<span th:text="${name}">
+	</p>
+	
+	<p>Your subjects of interest are:</p>
+	<ul>
+		<li>BasketBall</li>
+		<li>Politics</li>
+	</ul>
+	<p>
+		Regards, <br /> &emsp; <em>The Team</em>
+	</p>
+	<div align="center">
+	<h5>footer</h5>
+</div>
+    </body>
+</html>
