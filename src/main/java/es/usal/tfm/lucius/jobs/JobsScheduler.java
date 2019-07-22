@@ -15,9 +15,13 @@ public class JobsScheduler {
 	 * Tarea de prueba
 	 */
 	@Scheduled(cron = "0 0 4 ? * 1,4 ")
-	public void jobBuscarNotificaciones() {
-		System.out.println("CRON EJECUTADO DE GENERAR INFORMES");
-		logger.info("CRON EJECUTAR SISTEMAS: --- OK");
+	public void jobGenerarInformePlanta() {
+		logger.info("---------------------------------------------");
+		logger.info("--------- GENERAR INFORME PLANTA ------------");
+		logger.info("---------------------------------------------");
+		logger.info("");
+		logger.info("JOB SCHEDULED RESULTADO: ------------ [EXITO]");
+		logger.info("");
 	}
 
 }
