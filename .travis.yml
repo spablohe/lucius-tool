@@ -9,7 +9,7 @@ addons:
   sonarcloud:
     organization: "spablohe-github"
     token:
-      secure: f887959694bbbe07ab25fd5ecd4900ad0875aa8d
+      secure: fbfcccc4f3d62f620f5103c9cc8935cd81258133
 script:
   - ./mvnw clean install
   - sonar-scanner
