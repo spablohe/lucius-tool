@@ -13,7 +13,8 @@ import es.usal.tfm.lucius.estimador.dto.EstimadorDto;
 public class EstimadorController {
 
 	@RequestMapping(value = "/sendFormularioEstimacion", method = RequestMethod.POST)
-	public ModelAndView sendFormularioEstimacion(@ModelAttribute("estimadorDto") EstimadorDto estimadorDto, Model model) {
+	public ModelAndView sendFormularioEstimacion(@ModelAttribute("estimadorDto") EstimadorDto estimadorDto,
+			Model model) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("estimador_web");
 		model.addAttribute("estimacion", 1.23);
