@@ -16,7 +16,7 @@ deploy:
   provider: heroku
   api_key: 
     secure: 36ca5c53-cbd9-4238-852d-3dbb245ed7e3
-  app: lucius-tool
+  app: lucius-tool-v2
   on:
     repo: spablohe/lucius-tool
     
