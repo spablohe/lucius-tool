@@ -8,8 +8,7 @@ addons:
       - openjdk-8-jdk
   sonarcloud:
     organization: "spablohe-github"
-    token:
-      secure: fbfcccc4f3d62f620f5103c9cc8935cd81258133
+    token: fbfcccc4f3d62f620f5103c9cc8935cd81258133
 script:
   - ./mvnw clean install
   - sonar-scanner
